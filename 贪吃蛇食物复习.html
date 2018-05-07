@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    
+    #map {
+      width: 800px;
+      height: 600px;
+      background-color: #ccc;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<button>开始游戏</button>
+<div id="map"></div>
+    <script>
+        function Food(options) {
+            options = options || {};
+            this.width = options.width || 20;
+            this.height = options.height || 20;
+            this.bgColor = options.bgColor || "blue";
+            this.x = options.x || 0;
+            this.y = options.y || 0;   
+        }
+
+        Food.prototype.render = function (target) {
+            var div = document.createElement("div");
+            div.style.width = this.width + "px";
+            div.style.height = this.height + "px";
+            div.style.backgroundColor = this.bgColor;
+
+            this.x = parseInt(Math.random * target.offsetWidth / this.width);
+            this.y = parseInt(Math.random * target.offsetHeight / this.height);
+            div.style.position = "absolute";
+            div.style.left = this.x * this.width + "px";
+            div.style.top = this.y * this.height + "px";
+            target.appendChild(div);
+        }
+        var map = document.querySelector("#map");
+        var f = new Food();
+        f.render(map);
+    </script>
+</body>
+</html>
